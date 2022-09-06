@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class Aiming : MonoBehaviour
 {
     public Camera cam;
     private Vector2 lookDir;

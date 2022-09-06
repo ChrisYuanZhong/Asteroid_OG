@@ -13,7 +13,10 @@ public class Player : MonoBehaviour
     private bool _goingDown;
     private bool _goingLeft;
     private bool _goingRight;
+    private bool facingright = true;
 
+    Vector3 mousePos;
+    public Camera cam;
 
     private void Awake()
     {
@@ -22,10 +25,30 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _goingUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        _goingDown = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
-        _goingLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-        _goingRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        if (transform.position.x < mousePos.x && !facingright)
+        {
+            Flip();
+        }
+        else if (transform.position.x > mousePos.x && facingright)
+        {
+            Flip();
+        }
+
+        if (facingright)
+        {
+            _goingUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+            _goingDown = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+            _goingLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+            _goingRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        }
+        else
+        {
+            _goingUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+            _goingDown = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+            _goingLeft = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+            _goingRight = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        }
 
         /*if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
@@ -33,6 +56,12 @@ public class Player : MonoBehaviour
         }*/
     }
 
+    void Flip()
+    {
+        facingright = !facingright;
+
+        transform.Rotate(0f, 180f, 0f);
+    }
 
     private void FixedUpdate()
     {
