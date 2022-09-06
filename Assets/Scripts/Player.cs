@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Bullet bulletPrefab;
+    //public Bullet bulletPrefab;
 
     public float thrustSpeed = 1.0f;
-    public float turnSpeed = 1.0f;
 
 
     private Rigidbody2D _rigidbody;
  
-    private bool _thrusting;
-    private bool _backing;
-
-    private float _turnDirection;
+    private bool _goingUp;
+    private bool _goingDown;
+    private bool _goingLeft;
+    private bool _goingRight;
 
 
     private void Awake()
@@ -23,51 +22,43 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _thrusting = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        _backing = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        _goingUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        _goingDown = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        _goingLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        _goingRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            _turnDirection = 1.0f;
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            _turnDirection = -1.0f;
-        }
-        else
-        {
-            _turnDirection = 0.0f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        /*if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Shoot();
-        }
+        }*/
     }
 
 
     private void FixedUpdate()
     {
-        if (_thrusting)
+        if (_goingUp)
         {
             _rigidbody.AddForce(this.transform.up * this.thrustSpeed);
         }
-        if (_backing)
+        if (_goingDown)
         {
             _rigidbody.AddForce(-this.transform.up * this.thrustSpeed);
         }
-
-        if (_turnDirection != 0.0f)
+        if (_goingLeft)
         {
-            _rigidbody.AddTorque(_turnDirection * this.turnSpeed);
+            _rigidbody.AddForce(-this.transform.right * this.thrustSpeed);
+        }
+        if (_goingRight)
+        {
+            _rigidbody.AddForce(this.transform.right * this.thrustSpeed);
         }
     }
 
-    private void Shoot()
+    /*private void Shoot()
     {
         Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
         bullet.Project(this.transform.up);
-    }
+    }*/
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
