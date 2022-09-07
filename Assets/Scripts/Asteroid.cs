@@ -10,11 +10,13 @@ public class Asteroid : MonoBehaviour
     public float maxLifetime = 30.0f;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
+    private GameManager gameManager;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Start()
@@ -44,7 +46,7 @@ public class Asteroid : MonoBehaviour
                 CreateSplit();
             }
 
-            FindObjectOfType<GameManager>().AsteroidDestroyed(this);
+            gameManager.AsteroidDestroyed(this);
             Destroy(this.gameObject);
         }
     }

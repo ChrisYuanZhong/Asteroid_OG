@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Player player;
+    public Aiming aiming;
+    public AsteroidSpawner spawner;
     public ParticleSystem explosion;
     public float respawnTime = 2.0f;
     public int lives = 3;
@@ -26,6 +28,24 @@ public class GameManager : MonoBehaviour
         {
             score += 25;
         }
+    }
+
+    public void PillPicked(Pill pill)
+    {
+        this.explosion.transform.position = pill.transform.position;
+        this.explosion.Play();
+
+        lives++;
+        aiming.buff = true;
+        spawner.spawnAmount = 6;
+        spawner.spawnRate = 0.1f;
+    }
+
+    public void RemoveBuff()
+    {
+        aiming.buff = false;
+        spawner.spawnAmount = 1;
+        spawner.spawnRate = 2;
     }
 
     public void PlayerDied()

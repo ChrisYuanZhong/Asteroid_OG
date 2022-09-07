@@ -13,7 +13,7 @@ public class AsteroidSpawner : MonoBehaviour
         InvokeRepeating(nameof(Spawn), this.spawnRate, this.spawnRate);
     }
 
-    private void Spawn()
+    public void Spawn()
     {
         for (int i = 0; i < this.spawnAmount; i++)
         {
