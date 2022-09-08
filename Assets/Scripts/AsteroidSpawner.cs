@@ -4,7 +4,7 @@ public class AsteroidSpawner : MonoBehaviour
 {
     public Asteroid asteroidPrefab;
     public float trajectoryVariance = 15.0f;
-    public float spawnRate = 2.0f;
+    public float spawnRate = 1.5f;
     public float spawnDistance = 15.0f;
     public int spawnAmount = 1;
 

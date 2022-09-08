@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Aiming : MonoBehaviour
 {
+    public SpriteRenderer spriteRenderer;
+    public Sprite idle;
+    public Sprite shooting;
+    public float duration = 0.5f;
+    //private bool shooting = false;
+
     public Camera cam;
     private Vector2 lookDir;
     private float angle;
@@ -26,8 +32,18 @@ public class Aiming : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
+            StartCoroutine(ChangeSprite());
             Shoot();
         }
+    }
+
+    IEnumerator ChangeSprite()
+    {
+        spriteRenderer.sprite = shooting;
+
+        yield return new WaitForSeconds(duration);
+
+        spriteRenderer.sprite = idle;
     }
 
     void Shoot()
@@ -42,20 +58,6 @@ public class Aiming : MonoBehaviour
                 float tempRotation = startRotation + angleIncrease * i - spread;
                 Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0f, 0f, tempRotation));
                 bullet.Project(bullet.transform.up);
-
-                /*switch (i)
-                {
-                    case 0:
-                        bullet.Project(this.transform.up + new Vector3(0f, -90f, 0f));
-                        break;
-                    case 1:
-                        bullet.Project(this.transform.up + new Vector3(0f, 0f, 0f));
-                        break;
-                    case 2:
-                        bullet.Project(this.transform.up + new Vector3(0f, 90f, 0f));
-                        break;
-
-                }*/
             }
         }
         else

@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         aiming.buff = false;
         spawner.spawnAmount = 1;
-        spawner.spawnRate = 2;
+        spawner.spawnRate = 1.5f;
     }
 
     public void PlayerDied()
