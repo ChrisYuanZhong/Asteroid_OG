@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private GameManager gameManager;
 
+    public Text healthText;
+    private int health = 3;
+    
 
     private bool _goingUp;
     private bool _goingDown;
@@ -21,14 +25,18 @@ public class Player : MonoBehaviour
     Vector3 mousePos;
     public Camera cam;
 
+    
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        
     }
 
     private void Update()
     {
+        healthText.text = "x " + health;
+
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (transform.position.x < mousePos.x && !facingright)
         {
@@ -87,8 +95,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Asteroid")
         {
             StartCoroutine(Death());
+            health--;
+            
         }
     }
+
+    
 
     IEnumerator Death()
     {
