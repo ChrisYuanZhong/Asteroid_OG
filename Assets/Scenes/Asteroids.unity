@@ -437,8 +437,9 @@ MonoBehaviour:
   explosion: {fileID: 966218477}
   respawnTime: 2
   lives: 3
-  respawnInvulnerabilityTime: 3
+  respawnInvulnerabilityTime: 4.14
   score: 0
+  animator: {fileID: 0}
 --- !u!4 &582047361
 Transform:
   m_ObjectHideFlags: 0
@@ -5453,6 +5454,7 @@ GameObject:
   - component: {fileID: 1256707926}
   - component: {fileID: 1256707925}
   - component: {fileID: 1256707929}
+  - component: {fileID: 1256707930}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -5589,6 +5591,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrustSpeed: 1.5
   cam: {fileID: 519420031}
+--- !u!95 &1256707930
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256707924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf2881c7ab8facc49afd8363c187271a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1558829668
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Animator animator;
+
     public Player player;
     public Aiming aiming;
     public AsteroidSpawner spawner;
@@ -10,6 +12,8 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
     public float respawnInvulnerabilityTime = 3.0f;
     public int score = 0;
+
+    
 
     public void AsteroidDestroyed(Asteroid asteroid)
     {
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         this.explosion.transform.position = this.player.transform.position;
         this.explosion.Play();
+
         this.lives--;
 
         if (this.lives <= 0)

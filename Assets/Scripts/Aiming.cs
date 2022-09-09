@@ -10,6 +10,8 @@ public class Aiming : MonoBehaviour
     public float duration = 0.5f;
     //private bool shooting = false;
 
+    
+
     public Camera cam;
     private Vector2 lookDir;
     private float angle;
