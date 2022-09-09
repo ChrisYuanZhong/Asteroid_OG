@@ -1,9 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public float thrustSpeed = 1.0f;
 
+    public Animator animator;
 
     private Rigidbody2D _rigidbody;
     private GameManager gameManager;
@@ -83,12 +86,22 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Asteroid")
         {
-            _rigidbody.velocity = Vector3.zero;
-            _rigidbody.angularVelocity = 0.0f;
-
-            this.gameObject.SetActive(false);
-
-            gameManager.PlayerDied();
+            StartCoroutine(Death());
         }
+    }
+
+    IEnumerator Death()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.angularVelocity = 0.0f;
+
+        animator.SetBool("death", true);
+
+        gameManager.PlayerDied();
+
+        yield return new WaitForSeconds(0.5f);
+        
+        this.gameObject.SetActive(false);
+        animator.SetBool("death", false);
     }
 }

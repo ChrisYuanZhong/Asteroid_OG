@@ -9,8 +9,8 @@ public class Aiming : MonoBehaviour
     public Sprite shooting;
     public float duration = 0.5f;
     //private bool shooting = false;
-
-    
+    //public Animator animator;
+    public Player player;
 
     public Camera cam;
     private Vector2 lookDir;
@@ -23,7 +23,7 @@ public class Aiming : MonoBehaviour
 
 
     Vector3 mousePos;
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -35,17 +35,21 @@ public class Aiming : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             StartCoroutine(ChangeSprite());
+            
             Shoot();
         }
     }
 
     IEnumerator ChangeSprite()
     {
-        spriteRenderer.sprite = shooting;
+        //spriteRenderer.sprite = shooting;
+
+        player.animator.SetBool("shoot", true);
 
         yield return new WaitForSeconds(duration);
 
-        spriteRenderer.sprite = idle;
+        player.animator.SetBool("shoot", false);
+        //spriteRenderer.sprite = idle;
     }
 
     void Shoot()
