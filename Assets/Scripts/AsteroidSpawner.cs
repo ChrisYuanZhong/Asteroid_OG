@@ -4,7 +4,7 @@ public class AsteroidSpawner : MonoBehaviour
 {
     public Asteroid asteroidPrefab;
     public float trajectoryVariance = 15.0f;
-    public float spawnRate = 2.0f;
+    public float spawnRate = 1.5f;
     public float spawnDistance = 15.0f;
     public int spawnAmount = 1;
 
@@ -13,7 +13,7 @@ public class AsteroidSpawner : MonoBehaviour
         InvokeRepeating(nameof(Spawn), this.spawnRate, this.spawnRate);
     }
 
-    private void Spawn()
+    public void Spawn()
     {
         for (int i = 0; i < this.spawnAmount; i++)
         {
