@@ -229,6 +229,7 @@ MonoBehaviour:
   idle: {fileID: 21300000, guid: ce985ffacf402a64dbfb07ca615cc2cf, type: 3}
   shooting: {fileID: 21300000, guid: 2fdffc13a1da34b4db12d417f4e103d9, type: 3}
   duration: 0.5
+  player: {fileID: 1256707929}
   cam: {fileID: 519420031}
   bulletPrefab: {fileID: -767810038623862878, guid: 1389efd06933b0d4cb55a9f834c9899b, type: 3}
   buff: 0
@@ -439,7 +440,6 @@ MonoBehaviour:
   lives: 3
   respawnInvulnerabilityTime: 4.14
   score: 0
-  animator: {fileID: 0}
 --- !u!4 &582047361
 Transform:
   m_ObjectHideFlags: 0
@@ -5590,6 +5590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrustSpeed: 1.5
+  animator: {fileID: 1256707930}
   cam: {fileID: 519420031}
 --- !u!95 &1256707930
 Animator:
