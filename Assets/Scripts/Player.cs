@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private bool _goingLeft;
     private bool _goingRight;
     private bool facingright = true;
+    public AudioSource audioSource;
 
     Vector3 mousePos;
     public Camera cam;
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour
         {
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = 0.0f;
+
+            audioSource.Play();
 
             this.gameObject.SetActive(false);
 
