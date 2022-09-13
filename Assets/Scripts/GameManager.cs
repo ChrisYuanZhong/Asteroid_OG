@@ -50,8 +50,10 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied()
     {
-        this.explosion.transform.position = this.player.transform.position;
-        this.explosion.Play();
+        //this.explosion.transform.position = this.player.transform.position;
+        //this.explosion.Play();
+        
+
         this.lives--;
 
         if (this.lives <= 0)
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
         {
             Invoke(nameof(Respawn), this.respawnTime);
         }
+
+        //player.animator.SetBool("death", false);
     }
 
     private void Respawn()

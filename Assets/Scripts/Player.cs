@@ -1,32 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float thrustSpeed = 1.0f;
 
+    public Animator animator;
 
     private Rigidbody2D _rigidbody;
     private GameManager gameManager;
 
+    public Text healthText;
+    private int health = 3;
+    
 
     private bool _goingUp;
     private bool _goingDown;
     private bool _goingLeft;
     private bool _goingRight;
     private bool facingright = true;
-    public AudioSource audioSource;
 
     Vector3 mousePos;
     public Camera cam;
 
+    
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        
     }
 
     private void Update()
     {
+        healthText.text = "x " + health;
+
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (transform.position.x < mousePos.x && !facingright)
         {
@@ -84,14 +94,26 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Asteroid")
         {
-            _rigidbody.velocity = Vector3.zero;
-            _rigidbody.angularVelocity = 0.0f;
-
-            audioSource.Play();
-
-            this.gameObject.SetActive(false);
-
-            gameManager.PlayerDied();
+            StartCoroutine(Death());
+            health--;
+            
         }
+    }
+
+    
+
+    IEnumerator Death()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.angularVelocity = 0.0f;
+
+        animator.SetBool("death", true);
+
+        gameManager.PlayerDied();
+
+        yield return new WaitForSeconds(0.5f);
+        
+        this.gameObject.SetActive(false);
+        animator.SetBool("death", false);
     }
 }
