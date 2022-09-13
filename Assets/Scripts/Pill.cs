@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pill : MonoBehaviour
 {
     public float duration = 15.0f;
+    
 
     private GameManager gameManager;
 
