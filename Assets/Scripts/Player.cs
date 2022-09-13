@@ -13,8 +13,9 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
 
     public Text healthText;
-    private int health = 3;
-    
+    public Text scoreText;
+
+    public AudioSource audioSource;
 
     private bool _goingUp;
     private bool _goingDown;
@@ -35,7 +36,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        healthText.text = "x " + health;
+        healthText.text = "x " + gameManager.lives;
+        scoreText.text = "Score " + gameManager.score;
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (transform.position.x < mousePos.x && !facingright)
@@ -95,7 +97,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Asteroid")
         {
             StartCoroutine(Death());
-            health--;
             
         }
     }
@@ -106,6 +107,8 @@ public class Player : MonoBehaviour
     {
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.angularVelocity = 0.0f;
+
+        audioSource.Play();
 
         animator.SetBool("death", true);
 

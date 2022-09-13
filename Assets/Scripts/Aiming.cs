@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Aiming : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
+    //public SpriteRenderer spriteRenderer;
     public Sprite idle;
     public Sprite shooting;
     public float duration = 0.5f;

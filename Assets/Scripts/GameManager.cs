@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public Player player;
     public Aiming aiming;
+    public BackGround background;
     public AsteroidSpawner spawner;
     public ParticleSystem explosion;
     public float respawnTime = 2.0f;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void PillPicked(Pill pill)
     {
+        background.ChangeDruggedBG();
         this.explosion.transform.position = pill.transform.position;
         this.explosion.Play();
 
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveBuff()
     {
+        background.ChangeRegularBG();
         aiming.buff = false;
         spawner.spawnAmount = 1;
         spawner.spawnRate = 1.5f;
@@ -50,9 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied()
     {
-        //this.explosion.transform.position = this.player.transform.position;
-        //this.explosion.Play();
-        
+        player.GetComponent<BoxCollider2D>().enabled = false;
 
         this.lives--;
 
@@ -70,6 +72,9 @@ public class GameManager : MonoBehaviour
 
     private void Respawn()
     {
+        background.ChangeRegularBG();
+        RemoveBuff();
+        player.GetComponent<BoxCollider2D>().enabled = true;
         this.player.transform.position = Vector3.zero;
         this.player.gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
         this.player.gameObject.SetActive(true);
@@ -83,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        background.ChangeGameoverBG();
         lives = 3;
         score = 0; 
         
